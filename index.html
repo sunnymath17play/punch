@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>打卡</title>
+<meta name="apple-mobile-web-app-title" content="打卡">
+<meta name="theme-color" content="#f6b52e">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<style>
+  :root{--bg:#fff8e8;--ink:#4a3410;--muted:#8a6b32;--accent:#f6b52e}
+  @media (prefers-color-scheme:dark){:root{--bg:#1f1a10;--ink:#fbecc8;--muted:#cdb37a}}
+  body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+       background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;text-align:center;padding:24px 16px;box-sizing:border-box}
+  img{width:160px;height:160px;border-radius:36px;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+  a.go{display:inline-block;background:var(--accent);color:#3a2600;text-decoration:none;font-size:22px;font-weight:700;padding:14px 36px;border-radius:999px}
+  p{margin:0;font-size:17px;line-height:1.6;color:var(--muted)}
+  .tip{display:none;font-size:18px;color:var(--ink)}
+  .stay .tip{display:block}
+</style>
+</head>
+<body>
+<img src="icon-512.png" alt="打卡 LOGO">
+<p class="tip">現在按 Safari 的「分享」⬆️<br>→「加入主畫面」，名稱打「打卡」</p>
+<a class="go" id="go" href="#">點這裡打卡</a>
+<p>只有 sunnymath30 帳號打得開</p>
+<script>
+  var PUNCH = 'https://script.google.com/macros/s/AKfycbyNYuSkEy8cNem3a_kZm-JAeLgXF7V2rGj6pRjIX3HEyvAC-egwRVtE3tCDb2DgqnH0/exec';
+  document.getElementById('go').href = PUNCH;
+  if (/[?&]stay=1/.test(location.search)) {
+    // 加捷徑用：不轉址，網址列改回乾淨的入口網址，捷徑才會存這個
+    document.body.className = 'stay';
+    history.replaceState(null, '', location.pathname);
+  } else {
+    location.replace(PUNCH);
+  }
+</script>
+</body>
+</html>
